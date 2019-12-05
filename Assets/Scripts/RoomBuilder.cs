@@ -34,11 +34,11 @@ public class RoomBuilder : MonoBehaviour {
                 {
                     downCounter = 0;
 
-                    Vector2 pos = new Vector2(transform.position.x + 10, transform.position.y);
-                    transform.position = pos;
+                    Vector2 position = new Vector2(transform.position.x + 10, transform.position.y);
+                    transform.position = position;
 
-                    int randRoom = Random.Range(1, 4);
-                    Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+                    int randomRoom = Random.Range(1, 4);
+                    Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
                     direction = Random.Range(1, 6);
                     if (direction == 3)
@@ -57,11 +57,11 @@ public class RoomBuilder : MonoBehaviour {
                 {
                     downCounter = 0;
 
-                    Vector2 pos = new Vector2(transform.position.x - 10, transform.position.y);
-                    transform.position = pos;
+                    Vector2 position = new Vector2(transform.position.x - 10, transform.position.y);
+                    transform.position = position;
 
-                    int randRoom = Random.Range(1, 4);
-                    Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+                    int randomRoom = Random.Range(1, 4);
+                    Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
                     direction = Random.Range(3, 6);
                 }
@@ -90,17 +90,17 @@ public class RoomBuilder : MonoBehaviour {
                         {
                             previousRoom.GetComponent<Room>().DestroyRoom();
 
-                            int randRoomDownOpening = Random.Range(2, 5);
+                            int randomRoom = Random.Range(2, 5);
 
-                            if (randRoomDownOpening == 3)
-                                randRoomDownOpening = 2;
+                            if (randomRoom == 3)
+                                randomRoom = 2;
 
-                            Instantiate(rooms[randRoomDownOpening], transform.position, Quaternion.identity);
+                            Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
                         }
                     }
 
-                    Vector2 pos = new Vector2(transform.position.x, transform.position.y - 10);
-                    transform.position = pos;
+                    Vector2 position = new Vector2(transform.position.x, transform.position.y - 10);
+                    transform.position = position;
 
                     int randRoom = Random.Range(3, 5);
                     Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
