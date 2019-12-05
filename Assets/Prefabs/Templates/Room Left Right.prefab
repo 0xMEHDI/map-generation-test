@@ -1700,9 +1700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToSpawn:
-  - {fileID: 1285196271909724, guid: ffe92190b8acde24296994ffdbb13dfd, type: 3}
-  - {fileID: 1059517145776296, guid: 789cb061bf280cd4a9e7a6e7f610341f, type: 3}
   - {fileID: 1956603526010584, guid: dd1c8e4e2c2934141ad2299fbb6185f1, type: 3}
+  - {fileID: 1285196271909724, guid: ffe92190b8acde24296994ffdbb13dfd, type: 3}
 --- !u!1 &1779981034632478
 GameObject:
   m_ObjectHideFlags: 0
