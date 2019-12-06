@@ -1,19 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RoomBuilder : MonoBehaviour {
-
-    [SerializeField] Transform[] startingPositions;
+public class RoomBuilder : MonoBehaviour 
+{
     public GameObject[] rooms;
     [SerializeField] LayerMask roomMask;
-    [SerializeField] float limit;
 
+    Transform[] startingPositions;
+    LevelBuilder levelBuilder;
+
+    int limit;
     int direction;
     int downCounter;
     public bool generating = true;
 
+    void Awake()
+    {
+        levelBuilder = FindObjectOfType<LevelBuilder>();
+    }
+
     void Start()
     {
+        limit = 10 * levelBuilder.levelSize - 10;
+        startingPositions = new Transform[levelBuilder.levelSize];
+
+        for (int i = 0; i < startingPositions.Length; i++)
+            startingPositions[i] = levelBuilder.startingRoomPoints[i].transform;
+
         StartCoroutine(BuildRooms());
     }
 
