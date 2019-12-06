@@ -9,23 +9,21 @@ public class RoomBuilder : MonoBehaviour
     [SerializeField] float roomBuildDelay = 0.1f;
 
     Transform[] startingPositions;
-    LevelBuilder levelBuilder;
+    [SerializeField] LevelBuilder levelBuilder;
 
     int limit;
     int direction;
     int downCounter;
     public bool generating = true;
 
-    void Awake()
-    {
-        levelBuilder = FindObjectOfType<LevelBuilder>();
-    }
-
     void Start()
     {
-        if (Application.isPlaying)
-            levelBuilder.DestroyLevel();
+        BuildRooms();
+    }
 
+    public void BuildRooms()
+    {
+        levelBuilder.DestroyLevel();
         levelBuilder.BuildLevel();
 
         limit = 10 * levelBuilder.levelSize - 10;
@@ -34,17 +32,17 @@ public class RoomBuilder : MonoBehaviour
         for (int i = 0; i < startingPositions.Length; i++)
             startingPositions[i] = levelBuilder.startingRoomPoints[i].transform;
 
-        StartCoroutine(BuildRooms());
-    }
-
-    IEnumerator BuildRooms()
-    {
         int randomStartingPostion = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randomStartingPostion].position;
         Instantiate(rooms[1], transform.position, Quaternion.identity);
 
         direction = Random.Range(1, 6);
 
+        StartCoroutine(Build());
+    }
+
+    IEnumerator Build()
+    {
         yield return new WaitForSeconds(roomBuildDelay);
 
         while (generating)

@@ -8,18 +8,13 @@ public class LevelBuilder : MonoBehaviour
 
     public RoomPoint[] startingRoomPoints;
     RoomPoint[] roomPoints;
-    RoomBuilder roomBuilder;
+    public RoomBuilder roomBuilder;
     Transform points;
 
     [SerializeField] Transform borderWall;
     Transform newBorderWall;
     GameObject[] borderWalls;
     Transform borders;
-
-    void Awake()
-    {
-        roomBuilder = FindObjectOfType<RoomBuilder>();
-    }
 
     public void BuildLevel()
     {

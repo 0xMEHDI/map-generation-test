@@ -28,8 +28,6 @@ public class RoomPoint : MonoBehaviour {
         yield return new WaitForSeconds(10f);
 
         if (!roomBuilder.generating)
-        {
             Destroy(gameObject);
-        }
     }
 }
