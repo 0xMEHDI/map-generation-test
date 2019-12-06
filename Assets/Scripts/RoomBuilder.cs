@@ -54,7 +54,7 @@ public class RoomBuilder : MonoBehaviour {
 
             else if (direction == 3 || direction == 4)
             {
-                if (transform.position.x > -limit)
+                if (transform.position.x > 0)
                 {
                     downCounter = 0;
 
