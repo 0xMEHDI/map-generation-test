@@ -6,6 +6,7 @@ public class RoomBuilder : MonoBehaviour {
     [SerializeField] Transform[] startingPositions;
     public GameObject[] rooms;
     [SerializeField] LayerMask roomMask;
+    [SerializeField] float limit;
 
     int direction;
     int downCounter;
@@ -30,7 +31,7 @@ public class RoomBuilder : MonoBehaviour {
         {
             if (direction == 1 || direction == 2)
             {
-                if (transform.position.x < 15)
+                if (transform.position.x < limit)
                 {
                     downCounter = 0;
 
@@ -53,7 +54,7 @@ public class RoomBuilder : MonoBehaviour {
 
             else if (direction == 3 || direction == 4)
             {
-                if (transform.position.x > -15)
+                if (transform.position.x > -limit)
                 {
                     downCounter = 0;
 
@@ -74,7 +75,7 @@ public class RoomBuilder : MonoBehaviour {
             {
                 downCounter++;
 
-                if (transform.position.y > -15)
+                if (transform.position.y > -limit)
                 {
                     Collider2D previousRoom = Physics2D.OverlapCircle(transform.position, 1, roomMask);
 
