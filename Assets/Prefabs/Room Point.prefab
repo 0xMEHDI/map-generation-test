@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: Room Point
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,5 +46,5 @@ MonoBehaviour:
   roomMask:
     serializedVersion: 2
     m_Bits: 256
-  roomBuilder: {fileID: 0}
   closedRoom: {fileID: 1819742035316322, guid: ab29741fc42fed243a73343e16dfde25, type: 3}
+  roomBuilder: {fileID: 0}
