@@ -3,8 +3,10 @@ using System.Collections;
 
 public class RoomBuilder : MonoBehaviour 
 {
-    public GameObject[] rooms;
+    [SerializeField] GameObject[] rooms;
     [SerializeField] LayerMask roomMask;
+
+    [SerializeField] float roomBuildDelay = 0.1f;
 
     Transform[] startingPositions;
     LevelBuilder levelBuilder;
@@ -38,12 +40,11 @@ public class RoomBuilder : MonoBehaviour
 
         direction = Random.Range(1, 6);
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(roomBuildDelay);
 
         while (generating)
         {
             if (direction == 1 || direction == 2)
-            {
                 if (transform.position.x < limit)
                 {
                     downCounter = 0;
@@ -63,10 +64,8 @@ public class RoomBuilder : MonoBehaviour
 
                 else
                     direction = 5;
-            }
 
             else if (direction == 3 || direction == 4)
-            {
                 if (transform.position.x > 0)
                 {
                     downCounter = 0;
@@ -82,7 +81,6 @@ public class RoomBuilder : MonoBehaviour
 
                 else
                     direction = 5;
-            }
 
             else if (direction == 5)
             {
@@ -93,7 +91,6 @@ public class RoomBuilder : MonoBehaviour
                     Collider2D previousRoom = Physics2D.OverlapCircle(transform.position, 1, roomMask);
 
                     if (previousRoom.GetComponent<Room>().type != 4 && previousRoom.GetComponent<Room>().type != 2)
-                    {
                         if (downCounter >= 2)
                         {
                             previousRoom.GetComponent<Room>().DestroyRoom();
@@ -111,7 +108,6 @@ public class RoomBuilder : MonoBehaviour
 
                             Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
                         }
-                    }
 
                     Vector2 position = new Vector2(transform.position.x, transform.position.y - 10);
                     transform.position = position;
@@ -126,7 +122,7 @@ public class RoomBuilder : MonoBehaviour
                     generating = false;
             }
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(roomBuildDelay);
         }
     }
 }
