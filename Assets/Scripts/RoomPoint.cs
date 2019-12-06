@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class RoomPoint : MonoBehaviour {
 
     [SerializeField] LayerMask roomMask; 
     public GameObject closedRoom;
     public RoomBuilder roomBuilder;
+
+    void Start()
+    {
+        StartCoroutine(CleanRoomPoints());
+    }
 
     void Update () {
 
@@ -16,4 +22,14 @@ public class RoomPoint : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
+
+    IEnumerator CleanRoomPoints()
+    {
+        yield return new WaitForSeconds(10f);
+
+        if (!roomBuilder.generating)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

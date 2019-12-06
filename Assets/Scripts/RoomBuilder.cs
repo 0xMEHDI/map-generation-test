@@ -101,19 +101,19 @@ public class RoomBuilder : MonoBehaviour
                         {
                             previousRoom.GetComponent<Room>().DestroyRoom();
 
-                            int randomRoom = Random.Range(2, 5);
+                            int random = Random.Range(2, 5);
 
-                            if (randomRoom == 3)
-                                randomRoom = 2;
+                            if (random == 3)
+                                random = 2;
 
-                            Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
+                            Instantiate(rooms[random], transform.position, Quaternion.identity);
                         }
 
                     Vector2 position = new Vector2(transform.position.x, transform.position.y - 10);
                     transform.position = position;
 
-                    int randRoom = Random.Range(3, 5);
-                    Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+                    int randomRoom = Random.Range(3, 5);
+                    Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
                     direction = Random.Range(1, 6);
                 }
