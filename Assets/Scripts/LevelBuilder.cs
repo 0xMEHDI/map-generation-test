@@ -29,7 +29,6 @@ public class LevelBuilder : MonoBehaviour
             {
                 newRoomPoint = Instantiate(roomPoint, new Vector2(10 * i, -10 * j), Quaternion.identity);
                 newRoomPoint.roomBuilder = roomBuilder;
-                newRoomPoint.gameObject.transform.parent = GameObject.Find("Room Points").transform;
 
                 if (newRoomPoint.transform.position.x % 10 == 0 && newRoomPoint.transform.position.y == 0)
                     startingRoomPoints[i] = newRoomPoint;
