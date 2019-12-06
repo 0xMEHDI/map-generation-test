@@ -23,6 +23,11 @@ public class RoomBuilder : MonoBehaviour
 
     void Start()
     {
+        if (Application.isPlaying)
+            levelBuilder.DestroyLevel();
+
+        levelBuilder.BuildLevel();
+
         limit = 10 * levelBuilder.levelSize - 10;
         startingPositions = new Transform[levelBuilder.levelSize];
 
