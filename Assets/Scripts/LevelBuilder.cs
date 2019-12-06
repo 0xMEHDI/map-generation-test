@@ -17,6 +17,9 @@ public class LevelBuilder : MonoBehaviour
 
     void Start()
     {
+        if (Application.isPlaying)
+            DestroyLevel();
+
         BuildLevel();
     }
 
