@@ -120,61 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &142016954
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 142016955}
-  - component: {fileID: 142016956}
-  m_Layer: 0
-  m_Name: Room Builder
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &142016955
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142016954}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 10, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &142016956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142016954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4409eb5fcf367489f8072acfbc72cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rooms:
-  - {fileID: 1819742035316322, guid: ab29741fc42fed243a73343e16dfde25, type: 3}
-  - {fileID: 1318009043472772, guid: fc7181160622e6345acb65f19379e29d, type: 3}
-  - {fileID: 1442202877403164, guid: c08773aa125a12c47816b2e49b477874, type: 3}
-  - {fileID: 1711888464712350, guid: 8228f2f5ddd024e45ae49e9e046cf675, type: 3}
-  - {fileID: 1942163711769760, guid: e8b739a65aefeaf4196add5273203e16, type: 3}
-  roomMask:
-    serializedVersion: 2
-    m_Bits: 256
-  roomBuildDelay: 0.1
-  levelBuilder: {fileID: 187662363}
-  generating: 1
 --- !u!1 &187662361
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,11 +145,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187662361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &187662363
 MonoBehaviour:
@@ -219,17 +164,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSize: 5
+  roomMask:
+    serializedVersion: 2
+    m_Bits: 256
+  roomBuildDelay: 0.1
+  generating: 1
+  rooms:
+  - {fileID: 1819742035316322, guid: ab29741fc42fed243a73343e16dfde25, type: 3}
+  - {fileID: 1318009043472772, guid: fc7181160622e6345acb65f19379e29d, type: 3}
+  - {fileID: 1442202877403164, guid: c08773aa125a12c47816b2e49b477874, type: 3}
+  - {fileID: 1711888464712350, guid: 8228f2f5ddd024e45ae49e9e046cf675, type: 3}
+  - {fileID: 1942163711769760, guid: e8b739a65aefeaf4196add5273203e16, type: 3}
   roomPoint: {fileID: 9117481485699203748, guid: 6f8cea57de62a8d4691761c399dd8cf4,
     type: 3}
-  startingRoomPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  roomBuilder: {fileID: 142016956}
   borderWall: {fileID: 1130769019676835156, guid: 24704da76a16c7a419537da210426f65,
     type: 3}
+  roomStep: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +195,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -271,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 1
   edgeOffset: 2
+  levelBuilder: {fileID: 187662363}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -322,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12, y: 12, z: -10}
+  m_LocalPosition: {x: -10, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -356,7 +307,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746400153
 GameObject:
@@ -448,5 +399,5 @@ Transform:
   - {fileID: 1913096553}
   - {fileID: 1746400154}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

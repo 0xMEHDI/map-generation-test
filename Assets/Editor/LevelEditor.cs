@@ -14,11 +14,11 @@ public class LevelEditor : Editor
 
         if (GUILayout.Button("Build Level"))
         {
-            level.DestroyLevel();
+            level.CleanLevel();
             level.BuildLevel();
         }
             
-        if (GUILayout.Button("Destroy Level"))
-            level.DestroyLevel();
+        if (GUILayout.Button("Clean Level"))
+            level.CleanLevel();
     }
 }

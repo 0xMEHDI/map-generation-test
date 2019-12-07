@@ -4,8 +4,14 @@ using UnityEngine;
 public class RoomPoint : MonoBehaviour {
 
     [SerializeField] LayerMask roomMask; 
-    public GameObject closedRoom;
-    public RoomBuilder roomBuilder;
+    [SerializeField] GameObject closedRoom;
+
+    LevelBuilder LevelBuilder;
+
+    void Awake()
+    {
+        LevelBuilder = FindObjectOfType<LevelBuilder>();
+    }
 
     void Start()
     {
@@ -16,7 +22,7 @@ public class RoomPoint : MonoBehaviour {
 
         Collider2D room = Physics2D.OverlapCircle(transform.position, 1, roomMask);
 
-        if (room == null && !roomBuilder.generating) 
+        if (room == null && !LevelBuilder.generating) 
         {
             Instantiate(closedRoom, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -27,7 +33,7 @@ public class RoomPoint : MonoBehaviour {
     {
         yield return new WaitForSeconds(10f);
 
-        if (!roomBuilder.generating)
+        if (!LevelBuilder.generating)
             Destroy(gameObject);
     }
 }
