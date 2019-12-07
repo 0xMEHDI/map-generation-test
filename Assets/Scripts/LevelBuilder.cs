@@ -6,7 +6,7 @@ public class LevelBuilder : MonoBehaviour
     [Header("Settings")]
     public int levelSize = 5;
     [SerializeField] LayerMask roomMask;
-    [SerializeField] float roomBuildDelay = 0.1f;
+    public float roomBuildDelay = 0.1f;
     public bool generating = true;
 
     [Header ("Prefabs")]
@@ -24,25 +24,24 @@ public class LevelBuilder : MonoBehaviour
 
     void Start()
     {
+        limit = roomStep * levelSize - roomStep;
+
         CleanLevel();
         BuildLevel();
         BuildStartingRoom();
         StartCoroutine(Build());
     }
 
-    void BuildStartingRoom()
+    public void CleanLevel()
     {
-        limit = roomStep * levelSize - roomStep;
-        startingRoomPositions = new Transform[levelSize];
+        RoomPoint[] roomPoints = FindObjectsOfType<RoomPoint>();
+        GameObject[] borderWalls = GameObject.FindGameObjectsWithTag("Wall");
 
-        for (int i = 0; i < startingRoomPositions.Length; i++)
-            startingRoomPositions[i] = startingRoomPoints[i].transform;
+        for (int i = 0; i < roomPoints.Length; i++)
+            DestroyImmediate(roomPoints[i].gameObject);
 
-        int randomStartingPostion = Random.Range(0, startingRoomPositions.Length);
-        transform.position = startingRoomPositions[randomStartingPostion].position;
-        Instantiate(rooms[1], transform.position, Quaternion.identity);
-
-        step = Random.Range(1, 6);
+        for (int i = 0; i < borderWalls.Length; i++)
+            DestroyImmediate(borderWalls[i]);
     }
 
     public void BuildLevel()
@@ -86,20 +85,23 @@ public class LevelBuilder : MonoBehaviour
             }
     }
 
-    public void CleanLevel()
+    void BuildStartingRoom()
     {
-        RoomPoint[] roomPoints = FindObjectsOfType<RoomPoint>();
-        GameObject[] borderWalls = GameObject.FindGameObjectsWithTag("Wall");
+        startingRoomPositions = new Transform[levelSize];
 
-        for (int i = 0; i < roomPoints.Length; i++)
-            DestroyImmediate(roomPoints[i].gameObject);
+        for (int i = 0; i < startingRoomPositions.Length; i++)
+            startingRoomPositions[i] = startingRoomPoints[i].transform;
 
-        for (int i = 0; i < borderWalls.Length; i++)
-            DestroyImmediate(borderWalls[i]);
+        int randomStartingPostion = Random.Range(0, startingRoomPositions.Length);
+        transform.position = startingRoomPositions[randomStartingPostion].position;
+
+        Instantiate(rooms[1], transform.position, Quaternion.identity);
     }
 
     IEnumerator Build()
     {
+        step = Random.Range(1, 6);
+
         yield return new WaitForSeconds(roomBuildDelay);
 
         while (generating)

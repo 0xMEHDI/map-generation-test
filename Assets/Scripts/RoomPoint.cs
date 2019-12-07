@@ -6,15 +6,17 @@ public class RoomPoint : MonoBehaviour {
     [SerializeField] LayerMask roomMask; 
     [SerializeField] GameObject closedRoom;
 
-    LevelBuilder LevelBuilder;
+    LevelBuilder levelBuilder;
+    float cleanDelay;
 
     void Awake()
     {
-        LevelBuilder = FindObjectOfType<LevelBuilder>();
+        levelBuilder = FindObjectOfType<LevelBuilder>();
     }
 
     void Start()
     {
+        cleanDelay = Mathf.Pow(levelBuilder.levelSize, 3) * levelBuilder.roomBuildDelay;
         StartCoroutine(CleanRoomPoints());
     }
 
@@ -22,7 +24,7 @@ public class RoomPoint : MonoBehaviour {
 
         Collider2D room = Physics2D.OverlapCircle(transform.position, 1, roomMask);
 
-        if (room == null && !LevelBuilder.generating) 
+        if (room == null && !levelBuilder.generating) 
         {
             Instantiate(closedRoom, transform.position, Quaternion.identity);
             Destroy(gameObject);
@@ -31,9 +33,9 @@ public class RoomPoint : MonoBehaviour {
 
     IEnumerator CleanRoomPoints()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(cleanDelay);
 
-        if (!LevelBuilder.generating)
+        if (!levelBuilder.generating)
             Destroy(gameObject);
     }
 }
