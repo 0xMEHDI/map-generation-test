@@ -24,7 +24,7 @@ public class LevelBuilder : MonoBehaviour
 
     void Start()
     {
-        limit = roomStep * levelSize - roomStep;
+        limit = (levelSize - 1) * roomStep;
 
         CleanLevel();
         BuildLevel();
@@ -61,11 +61,12 @@ public class LevelBuilder : MonoBehaviour
                 if (newRoomPoint.transform.position.x % roomStep == 0 && newRoomPoint.transform.position.y == 0)
                 {
                     startingRoomPoints[i] = newRoomPoint;
+
                     newBorderWall = Instantiate(borderWall, new Vector3(newRoomPoint.transform.position.x, 5.5f), Quaternion.identity);
                     newBorderWall.parent = borderHolder;
                 }
 
-                if (newRoomPoint.transform.position.x % roomStep == 0 && newRoomPoint.transform.position.y == -levelSize * roomStep + roomStep)
+                if (newRoomPoint.transform.position.x % roomStep == 0 && newRoomPoint.transform.position.y == (1 - levelSize) * roomStep)
                 {
                     newBorderWall = Instantiate(borderWall, new Vector3(newRoomPoint.transform.position.x, -levelSize * roomStep + 4.5f), Quaternion.identity);
                     newBorderWall.parent = borderHolder;
@@ -77,7 +78,7 @@ public class LevelBuilder : MonoBehaviour
                     newBorderWall.parent = borderHolder;
                 }
 
-                if (newRoomPoint.transform.position.x == levelSize * roomStep - roomStep && newRoomPoint.transform.position.y % roomStep == 0)
+                if (newRoomPoint.transform.position.x == limit && newRoomPoint.transform.position.y % roomStep == 0)
                 {
                     newBorderWall = Instantiate(borderWall, new Vector3(levelSize * roomStep - 4.5f, newRoomPoint.transform.position.y), Quaternion.AngleAxis(90, Vector3.forward));
                     newBorderWall.parent = borderHolder;
@@ -95,7 +96,7 @@ public class LevelBuilder : MonoBehaviour
         int randomStartingPostion = Random.Range(0, startingRoomPositions.Length);
         transform.position = startingRoomPositions[randomStartingPostion].position;
 
-        Instantiate(rooms[1], transform.position, Quaternion.identity);
+        GameObject newRoom = Instantiate(rooms[1], transform.position, Quaternion.identity);
     }
 
     IEnumerator Build()
