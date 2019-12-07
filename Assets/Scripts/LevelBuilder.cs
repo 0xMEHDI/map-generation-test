@@ -6,6 +6,7 @@ public class LevelBuilder : MonoBehaviour
     [Header("Settings")]
     public int levelSize = 5;
     [SerializeField] LayerMask roomMask;
+    [SerializeField] LayerMask wallMask;
     public float roomBuildDelay = 0.1f;
     public bool generating = true;
 
@@ -28,7 +29,7 @@ public class LevelBuilder : MonoBehaviour
 
         CleanLevel();
         BuildLevel();
-        BuildStartingRoom();
+
         StartCoroutine(Build());
     }
 
@@ -86,7 +87,7 @@ public class LevelBuilder : MonoBehaviour
             }
     }
 
-    void BuildStartingRoom()
+    void BuildEntrance()
     {
         startingRoomPositions = new Transform[levelSize];
 
@@ -96,11 +97,17 @@ public class LevelBuilder : MonoBehaviour
         int randomStartingPostion = Random.Range(0, startingRoomPositions.Length);
         transform.position = startingRoomPositions[randomStartingPostion].position;
 
-        GameObject newRoom = Instantiate(rooms[1], transform.position, Quaternion.identity);
+        GameObject entrance = Instantiate(rooms[4], transform.position, Quaternion.identity);
+
+        RaycastHit2D hit = Physics2D.Raycast(entrance.transform.position, Vector2.up, Mathf.Infinity, wallMask);
+        if (hit.transform.position.x == entrance.transform.position.x)
+            Destroy(hit.transform.gameObject);
     }
 
     IEnumerator Build()
     {
+        BuildEntrance();
+
         step = Random.Range(1, 6);
 
         yield return new WaitForSeconds(roomBuildDelay);
@@ -181,10 +188,24 @@ public class LevelBuilder : MonoBehaviour
                 }
 
                 else
-                    generating = false;
+                    BuildExit();
             }
 
             yield return new WaitForSeconds(roomBuildDelay);
         }
+    }
+
+    void BuildExit()
+    {
+        generating = false;
+
+        Collider2D room = Physics2D.OverlapCircle(transform.position, 1f, roomMask);
+        Destroy(room.gameObject);
+
+        GameObject exit = Instantiate(rooms[4], transform.position, Quaternion.identity);
+
+        RaycastHit2D hit = Physics2D.Raycast(exit.transform.position, Vector2.down, Mathf.Infinity, wallMask);
+        if (hit.transform.position.x == exit.transform.position.x)
+            Destroy(hit.transform.gameObject);
     }
 }

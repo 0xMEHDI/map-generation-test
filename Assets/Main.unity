@@ -145,7 +145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187662361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -167,6 +167,9 @@ MonoBehaviour:
   roomMask:
     serializedVersion: 2
     m_Bits: 256
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 512
   roomBuildDelay: 0.1
   generating: 1
   rooms:
