@@ -24,14 +24,14 @@ public class LevelBuilder : MonoBehaviour
 
     void Start()
     {
-        BuildRooms();
-    }
-
-    void BuildRooms()
-    {
         CleanLevel();
         BuildLevel();
+        BuildStartingRoom();
+        StartCoroutine(Build());
+    }
 
+    void BuildStartingRoom()
+    {
         limit = roomStep * levelSize - roomStep;
         startingRoomPositions = new Transform[levelSize];
 
@@ -43,8 +43,6 @@ public class LevelBuilder : MonoBehaviour
         Instantiate(rooms[1], transform.position, Quaternion.identity);
 
         step = Random.Range(1, 6);
-
-        StartCoroutine(Build());
     }
 
     public void BuildLevel()
@@ -79,12 +77,12 @@ public class LevelBuilder : MonoBehaviour
                     newBorderWall = Instantiate(borderWall, new Vector3(-5.5f, newRoomPoint.transform.position.y), Quaternion.AngleAxis(90, Vector3.forward));
                     newBorderWall.parent = borderHolder;
                 }
-                   
+
                 if (newRoomPoint.transform.position.x == levelSize * roomStep - roomStep && newRoomPoint.transform.position.y % roomStep == 0)
                 {
                     newBorderWall = Instantiate(borderWall, new Vector3(levelSize * roomStep - 4.5f, newRoomPoint.transform.position.y), Quaternion.AngleAxis(90, Vector3.forward));
                     newBorderWall.parent = borderHolder;
-                }          
+                }
             }
     }
 
@@ -118,10 +116,9 @@ public class LevelBuilder : MonoBehaviour
                     Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
                     step = Random.Range(1, 6);
-                    if (step == 3)
+
+                    if (step == 3 || step == 4)
                         step = 1;
-                    else if (step == 4)
-                        step = 5;
                 }
 
                 else
