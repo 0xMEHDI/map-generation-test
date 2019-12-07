@@ -108,33 +108,13 @@ public class LevelBuilder : MonoBehaviour
     {
         BuildEntrance();
 
-        step = Random.Range(1, 6);
+        step = Random.Range(0, 9);
 
         yield return new WaitForSeconds(roomBuildDelay);
 
         while (generating)
         {
-            if (step == 1 || step == 2)
-                if (transform.position.x < limit)
-                {
-                    downCounter = 0;
-
-                    Vector2 position = new Vector2(transform.position.x + roomStep, transform.position.y);
-                    transform.position = position;
-
-                    int randomRoom = Random.Range(1, 4);
-                    Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
-
-                    step = Random.Range(1, 6);
-
-                    if (step == 3 || step == 4)
-                        step = 1;
-                }
-
-                else
-                    step = 5;
-
-            else if (step == 3 || step == 4)
+            if (step == 0 || step == 1 || step == 2 || step == 3)
                 if (transform.position.x > 0)
                 {
                     downCounter = 0;
@@ -145,13 +125,33 @@ public class LevelBuilder : MonoBehaviour
                     int randomRoom = Random.Range(1, 4);
                     Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
-                    step = Random.Range(3, 6);
+                    step = Random.Range(0, 9);
+
+                    if (step == 4 || step == 5 || step == 6 || step == 7)
+                        step = 0;
                 }
 
                 else
-                    step = 5;
+                    step = 8;
 
-            else if (step == 5)
+            else if (step == 4 || step == 5 || step == 6 || step == 7)
+                if (transform.position.x < limit)
+                {
+                    downCounter = 0;
+
+                    Vector2 position = new Vector2(transform.position.x + roomStep, transform.position.y);
+                    transform.position = position;
+
+                    int randomRoom = Random.Range(1, 4);
+                    Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
+
+                    step = Random.Range(4, 9);
+                }
+
+                else
+                    step = 8;
+
+            else if (step == 8)
             {
                 downCounter++;
 
@@ -184,7 +184,7 @@ public class LevelBuilder : MonoBehaviour
                     int randomRoom = Random.Range(3, 5);
                     Instantiate(rooms[randomRoom], transform.position, Quaternion.identity);
 
-                    step = Random.Range(1, 6);
+                    step = Random.Range(0, 9);
                 }
 
                 else
