@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531e7f2ba3df9a743a788dd05f9be80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSize: 5
+  levelSize: 25
   roomMask:
     serializedVersion: 2
     m_Bits: 256
